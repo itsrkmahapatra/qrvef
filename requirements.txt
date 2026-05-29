@@ -1,2 +1,6 @@
 cryptography==42.0.5
 ecdsa==0.18.0
+mlkem==0.2.0
+noknow==0.0.3
+fastapi==0.111.0
+uvicorn==0.30.1
