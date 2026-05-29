@@ -16,19 +16,24 @@ QRVEF is a Python middleware that implements verifiable crypto-shredding. It sat
 We also got tired of memory extraction attacks on our keys, so we wired up direct OS-level memory locking (`mlock`) to bypass Python's garbage collector.
 
 ### Features
-- **Hybrid Post-Quantum Key Encapsulation (FIPS 203)**: Combines X25519 and ML-KEM-768 for defense-in-depth.
-- **ZKP-Backed Erasure Certificates**: Mathematically prove data deletion without revealing secrets.
-- **FinTech Sidecar Adapter**: FastAPI-based bridge for platforms like MetaTrader 5 (MQL5).
-- **Verifiable Crypto-Shredding (AES-256-GCM)**
-- **In-memory Append-Only Merkle Trees** for audit trails
-- **Extreme Memory Protection** (`mlock`/`munlock`)
-- **Anti-tampering & Debugger evasion** (via `sys.gettrace` hooks and FIM)
+- **IETF SCITT Alignment**: Native support for `COSE_Sign1` event logging and transparency service interoperability.
+- **zk-STARK Post-Quantum Auditing**: Hash-based, quantum-resistant Zero-Knowledge Proofs for verifiable erasure.
+- **HSM Enclave Support**: Modular adapters for AWS CloudHSM and Azure Key Vault hardware-backed security.
+- **Nuitka Binary Compilation**: C-level anti-tampering and reverse-engineering protection via optimized binary builds.
+- **Hybrid Post-Quantum Key Encapsulation (FIPS 203)**: Combines X25519 and ML-KEM-768.
+- **FinTech Sidecar Adapter**: FastAPI-based bridge for algorithmic trading (MT5/MQL5).
+- **Extreme Memory Protection**: Kernel-level `mlock` to prevent key leakage to disk.
 
 ### Setup
 
 Install the requirements:
 ```bash
 pip install -r requirements.txt
+```
+
+To compile a secure binary:
+```bash
+python nuitka_build.py
 ```
 
 *Note: For the sidecar adapter, run `python adapter.py`.*
