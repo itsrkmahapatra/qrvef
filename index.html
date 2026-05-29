@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRVEF | The Erasable Immutable Log</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050508;
+            --card-bg: #0d0e14;
+            --primary: #00f2ff;
+            --secondary: #7000ff;
+            --danger: #ff0055;
+            --success: #00ff88;
+            --text: #f0f0f5;
+            --text-dim: #9494b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .mono { font-family: 'Fira Code', monospace; }
+
+        /* --- Header --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #111420 0%, var(--bg) 80%);
+            padding: 20px;
+            position: relative;
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dim);
+            margin-top: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        /* --- Content Sections --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        section { margin-bottom: 150px; }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        h2::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* --- Paradox Section --- */
+        .paradox-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .paradox-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .paradox-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+        }
+
+        .gdpr::before { background: var(--danger); }
+        .mifid::before { background: var(--primary); }
+
+        .paradox-card h3 {
+            font-size: 1.8rem;
+            margin-top: 0;
+        }
+
+        .vs-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #151621;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            box-shadow: 0 0 30px rgba(112, 0, 255, 0.3);
+        }
+
+        /* --- Flow Section --- */
+        .flow-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .flow-panel {
+            background: #090a0f;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .status-live { background: rgba(0, 255, 136, 0.1); color: var(--success); border: 1px solid var(--success); }
+        .status-purged { background: rgba(255, 0, 85, 0.1); color: var(--danger); border: 1px solid var(--danger); }
+
+        .log-viz {
+            background: #000;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 1px solid #1a1b26;
+        }
+
+        .log-entry {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+        }
+
+        .hash { color: var(--primary); }
+        .data { color: var(--text-dim); }
+        .key-active { color: var(--success); }
+        .key-dead { color: var(--danger); text-decoration: line-through; }
+
+        .shred-animation {
+            height: 2px;
+            width: 0;
+            background: var(--danger);
+            margin: 20px 0;
+            box-shadow: 0 0 10px var(--danger);
+            animation: grow 2s infinite alternate;
+        }
+
+        @keyframes grow { from { width: 0; } to { width: 100%; } }
+
+        /* --- FAQ --- */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .faq-item h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .faq-item p {
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 100px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: #030305;
+        }
+
+        .copyright {
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-top: 20px;
+        }
+
+        .credit {
+            font-weight: bold;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 900px) {
+            h1 { font-size: 3rem; }
+            .paradox-grid, .flow-comparison { grid-template-columns: 1fr; }
+            .vs-circle { margin: 20px auto; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="mono" style="color: var(--primary); margin-bottom: 10px;">[ DEPLOYMENT: PRODUCTION_V3.0 ]</div>
+    <h1>QRVEF</h1>
+    <div class="hero-subtitle">The Erasable Immutable Log</div>
+    <div style="margin-top: 40px;">
+        <a href="#paradox" style="color: var(--text); text-decoration: none; border: 1px solid var(--primary); padding: 12px 30px; border-radius: 50px; font-weight: bold; transition: 0.3s; box-shadow: var(--glow);">EXPLORE ARCHITECTURE</a>
+    </div>
+</header>
+
+<div class="container">
+    
+    <section id="paradox">
+        <h2>The Regulatory Paradox</h2>
+        <div class="paradox-grid">
+            <div class="paradox-card gdpr">
+                <h3>GDPR Article 17</h3>
+                <p>The <b>"Right to Erasure"</b> mandates that personal data must be permanently deleted upon request. This includes every instance across backups, archives, and distributed logs.</p>
+                <div class="mono" style="font-size: 0.8rem; color: var(--danger);">FAIL: $3B+ in 2025 Penalties</div>
+            </div>
+            <div class="vs-circle">VS</div>
+            <div class="paradox-card mifid">
+                <h3>MiFID II Art. 16(7)</h3>
+                <p>The <b>"Auditability Mandate"</b> requires all financial interactions to be stored in an immutable, tamper-evident format for up to 7 years. <b>No data can be deleted.</b></p>
+                <div class="mono" style="font-size: 0.8rem; color: var(--primary);">STATUS: Compliance Mandatory</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>The Visual Flow</h2>
+        <p style="color: var(--text-dim); margin-bottom: 40px;">How QRVEF resolves the conflict through Verifiable Crypto-Shredding.</p>
+        
+        <div class="flow-comparison">
+            <!-- Before -->
+            <div class="flow-panel">
+                <span class="status-badge status-live">State: BEFORE ERASURE</span>
+                <p>The Subject's PII is active. The Data Encryption Key (DEK) exists within a FIPS-validated HSM.</p>
+                
+                <div class="log-viz mono">
+                    <div class="log-entry"><span class="hash">H1:</span> <span class="data">Encrypted_Payload_A</span></div>
+                    <div class="log-entry"><span class="hash">H2:</span> <span class="data">Encrypted_Payload_B</span> <span class="key-active">[KEY_0xAF...]</span></div>
+                    <div class="log-entry"><span class="hash">H3:</span> <span class="data">Encrypted_Payload_C</span></div>
+                </div>
+                
+                <p style="color: var(--success); font-size: 0.9rem;">✔ Hash Chain: VALID<br>✔ PII: ACCESSIBLE (AUTHORIZED)</p>
+            </div>
+
+            <!-- After -->
+            <div class="flow-panel">
+                <span class="status-badge status-purged">State: AFTER ERASURE</span>
+                <p>The "Right to Erasure" is invoked. QRVEF executes a targeted purge of the specific DEK.</p>
+                
+                <div class="shred-animation"></div>
+
+                <div class="log-viz mono">
+                    <div class="log-entry"><span class="hash">H1:</span> <span class="data">Encrypted_Payload_A</span></div>
+                    <div class="log-entry"><span class="hash">H2:</span> <span class="data" style="color: var(--danger);">[SHREDDED_NOISE]</span> <span class="key-dead">[DESTROYED]</span></div>
+                    <div class="log-entry"><span class="hash">H3:</span> <span class="data">Encrypted_Payload_C</span></div>
+                </div>
+                
+                <p style="color: var(--primary); font-size: 0.9rem;">✔ Hash Chain: STILL VALID (SCITT/Merkle)<br>✔ PII: MATHEMATICALLY UNRECOVERABLE</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Compliance & Architecture FAQ</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>Is this NIST SP 800-88 Compliant?</h4>
+                <p>Yes. NIST SP 800-88 Revision 1 explicitly recognizes <b>Cryptographic Erasure</b> as a "Purge" level sanitization mechanism, effectively rendering the data infeasible to recover even with laboratory techniques.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What are zk-STARK Certificates?</h4>
+                <p>QRVEF generates Scalable Transparent Arguments of Knowledge. These provide post-quantum proof that a specific data point existed and was subsequently shredded, without revealing the underlying data to auditors.</p>
+            </div>
+            <div class="faq-item">
+                <h4>How is memory protected?</h4>
+                <p>We utilize the POSIX <code>mlock()</code> and <code>VirtualLock</code> system calls to pin keys into physical RAM, strictly preventing them from ever touching the disk swap files or being extracted via core dumps.</p>
+            </div>
+            <div class="faq-item">
+                <h4>What platforms are supported?</h4>
+                <p>Our Sidecar Adapter allows seamless integration with MT5 (MQL5), custom C++ algorithmic engines, and standard Python-based AI memory systems like MemGPT and Letta.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="mono credit">Raj Kishor Mahapatra</div>
+    <div class="copyright">
+        Architecture & Design &copy; 2026. All Rights Reserved.<br>
+        <span style="font-size: 0.8rem; color: #444;">Quantum-Resistant Verifiable Erasure Framework (QRVEF)</span>
+    </div>
+</footer>
+
+</body>
+</html>
