@@ -10,7 +10,7 @@ We also got tired of memory extraction attacks on our keys, so we wired up direc
 - Verifiable Crypto-Shredding (AES-256-GCM)
 - In-memory Append-Only Merkle Trees for audit trails
 - Extreme Memory Protection (`mlock`/`munlock`)
-- Anti-tampering & Debugger evasion
+- Anti-tampering & Debugger evasion (via `sys.gettrace` hooks and FIM)
 - Designed for hybrid Post-Quantum Cryptography (FIPS 203 / 204 integration ready)
 
 ### Setup

@@ -7,12 +7,17 @@ Demonstrates the initialization of the crypto shredding pipeline.
 """
 import json
 import logging
+import os
 from memory_lock import disable_core_dumps
 from crypto_core import CryptoShredderAPI
+from anti_tamper import enforce_security_profile
 
 logging.basicConfig(level=logging.INFO)
 
 def init_framework():
+    # Enforce anti-tampering FIM on our own script before proceeding
+    enforce_security_profile(os.path.abspath(__file__))
+
     # TODO: Add proper CLI argument parsing here later.
     # Just setting up the base skeleton for now.
     logging.info("Initializing QRVEF...")
