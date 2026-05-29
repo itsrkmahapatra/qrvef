@@ -71,6 +71,11 @@ python adapter.py
 
 ---
 
+## 💖 Support the Project
+If you find QRVEF useful for your compliance or security needs, consider supporting its development. You can donate via the **"Donate via UPI"** button on the [Live Architecture Page](https://itsrkmahapatra.github.io/qrvef/).
+
+---
+
 ## ⚖️ License & Attribution
 
 - **Author**: Raj Kishor Mahapatra
