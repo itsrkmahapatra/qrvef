@@ -16,18 +16,22 @@ QRVEF is a Python middleware that implements verifiable crypto-shredding. It sat
 We also got tired of memory extraction attacks on our keys, so we wired up direct OS-level memory locking (`mlock`) to bypass Python's garbage collector.
 
 ### Features
-- Verifiable Crypto-Shredding (AES-256-GCM)
-- In-memory Append-Only Merkle Trees for audit trails
-- Extreme Memory Protection (`mlock`/`munlock`)
-- Anti-tampering & Debugger evasion (via `sys.gettrace` hooks and FIM)
-- Designed for hybrid Post-Quantum Cryptography (FIPS 203 / 204 integration ready)
+- **Hybrid Post-Quantum Key Encapsulation (FIPS 203)**: Combines X25519 and ML-KEM-768 for defense-in-depth.
+- **ZKP-Backed Erasure Certificates**: Mathematically prove data deletion without revealing secrets.
+- **FinTech Sidecar Adapter**: FastAPI-based bridge for platforms like MetaTrader 5 (MQL5).
+- **Verifiable Crypto-Shredding (AES-256-GCM)**
+- **In-memory Append-Only Merkle Trees** for audit trails
+- **Extreme Memory Protection** (`mlock`/`munlock`)
+- **Anti-tampering & Debugger evasion** (via `sys.gettrace` hooks and FIM)
 
 ### Setup
 
-Install the requirements (we kept it strictly open-source):
+Install the requirements:
 ```bash
 pip install -r requirements.txt
 ```
+
+*Note: For the sidecar adapter, run `python adapter.py`.*
 
 *Note: If you're running this on Linux, make sure your `ulimit -l` is configured correctly, otherwise the memory locking will throw an OS error.*
 
