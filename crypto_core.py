@@ -64,17 +64,24 @@ class MerkleTree:
     """An in-memory append-only Merkle Tree for event sequence integrity."""
     def __init__(self):
         self.leaves = []
+        self._cached_root = None
 
     def append_event(self, event_hash: str):
         self.leaves.append(event_hash)
+        self._cached_root = None # Invalidate cache
         logger.info(f"Appended event hash to Merkle Tree: {event_hash}")
 
     def get_root(self):
         if not self.leaves:
             return None
+        if self._cached_root:
+            return self._cached_root
+            
         current_hash = hashlib.sha256(self.leaves[0].encode()).hexdigest()
         for leaf in self.leaves[1:]:
             current_hash = hashlib.sha256((current_hash + leaf).encode()).hexdigest()
+        
+        self._cached_root = current_hash
         return current_hash
 
 class CryptoShredderAPI:
