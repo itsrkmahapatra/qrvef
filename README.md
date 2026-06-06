@@ -1,4 +1,4 @@
-﻿# ✍️ qrvef
+# ✍️ qrvef
 
 The Quantum-Resistant Verifiable Erasure Framework resolving GDPR right-to-be-forgotten vs MiFID II record-retention using FIPS 203 ML-KEM and zk-STARKs.
 
@@ -66,5 +66,5 @@ Contributions are extremely welcome! Please check out [CONTRIBUTING.md](.github/
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## 📥 Download Application
-- [🖥️ Windows Download (.exe)](https://github.com/itsrkmahapatra/qrvef/releases/download/v1.0.0/qrvef.exe)
-- [📱 Android Download (.apk)](https://github.com/itsrkmahapatra/qrvef/releases/download/v1.0.0/qrvef.apk)
+- [🖥️ Windows Download (.exe)](https://github.com/itsrkmahapatra/qrvef/releases/latest
+- [📱 Android Download (.apk)](https://github.com/itsrkmahapatra/qrvef/releases/latest
