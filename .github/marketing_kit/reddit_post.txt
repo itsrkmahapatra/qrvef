@@ -1,0 +1,24 @@
+﻿=========================================
+REDDIT TITLE OPTIONS:
+1. Show r/webdev: QRVEF — A Post-Quantum Cryptographic Framework solving GDPR data erasure audits
+2. How I built a verifiable erasure protocol using FIPS 203 ML-KEM and zk-STARK zero-knowledge proofs
+3. Bridging GDPR and MiFID II: A post-quantum verifiable shredding framework written in Python
+=========================================
+
+Hey r/webdev!
+
+I wanted to share **QRVEF** (Quantum-Resistant Verifiable Erasure Framework). It's an open-source Python cryptographic framework designed to resolve the compliance paradox between GDPR's "Right to Be Forgotten" and MiFID II's transaction retention directives.
+
+### How It Solves the Paradox
+Rather than deleting the physical logs, QRVEF encrypts records using unique key encapsulation keys. To erase a record, we shred the corresponding decryption key and use zk-STARKs to generate a zero-knowledge receipt proving to auditors that the key has been permanently destroyed.
+
+### Tech Stack
+- **Backend:** Python.
+- **Cryptography:** FIPS 203 ML-KEM (Kyber implementation).
+- **Prover Engine:** zk-STARK proof commitment protocols.
+
+I would love to get your thoughts on the cryptographic protocol architecture, and feedback from backend developers on how to design database drivers to facilitate this key-per-user lifecycle.
+
+Check out the code here: https://github.com/itsrkmahapatra/qrvef
+
+Thanks!
