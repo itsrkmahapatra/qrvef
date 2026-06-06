@@ -37,7 +37,7 @@ jobs:
           npx cap init "qrvef" "com.itsrkmahapatra.qrvef" --web-dir www
           mkdir www
           echo "<html><body>Loading...</body></html>" > www/index.html
-          echo '{ "appId": "com.itsrkmahapatra.qrvef", "appName": "qrvef", "webDir": "www", "server": { "url": "https://itsrkmahapatra.github.io/qrvef", "cleartext": true } }' > capacitor.config.json
+          echo '{ "appId": "com.itsrkmahapatra.qrvef", "appName": "qrvef", "webDir": "www", "server": { "url": "https://itsrkmahapatra.github.io/qrvef?v=1780753094", "cleartext": true } }' > capacitor.config.json
           npx cap add android
 
       - name: Add App Icon
