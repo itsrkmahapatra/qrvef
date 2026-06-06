@@ -1,30 +1,36 @@
-# Contributing to QRVEF
+﻿# Contributing to qrvef
 
-First off, thanks for taking the time to contribute! It's people like you that make QRVEF such a great tool for the privacy community.
+Thank you for your interest in contributing to qrvef! We welcome code contributions, documentation, bug reports, and feature suggestions.
 
-## Code of Conduct
-By participating in this project, you are expected to uphold our high standards of integrity and respect.
+## 🚀 Local Onboarding Setup
+1. **Fork the Repository:** Fork this repository on GitHub to your account.
+2. **Clone Locally:** Clone your fork using your terminal:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/qrvef.git
+   cd qrvef
+   ```
+3. **Environment Setup:** Make sure you have the appropriate dependencies installed (e.g. Node.js or Python). Install project-specific packages:
+   * Node.js/Vite: `npm install`
+   * Python: `pip install -r requirements.txt`
 
-## How Can I Contribute?
+## 🧪 Testing Expectations
+* Always run local tests before pushing your changes:
+  * Running tests: `npm run test` or `python -m pytest` where applicable.
+* Ensure code adheres to formatting rules. Running `npm run lint` or `black .` is highly encouraged.
 
-### Reporting Bugs
-* Check the existing issues to see if it's already been reported.
-* Use the Bug Report template if available.
-* Include as much detail as possible: OS, Python version, and a minimal reproduction script.
+## 🌿 Branching Strategy
+* Always create a descriptive branch for your changes:
+  * `feature/your-feature-name` for new features
+  * `bugfix/your-fix-name` for bug fixes
+* Submit your Pull Request targeting the `main` or `master` branch.
 
-### Suggesting Enhancements
-* We are specifically looking for help with **FIPS 203 (ML-KEM)** and **FIPS 204 (ML-DSA)** hybrid integration.
-* Open an issue with the "enhancement" label to discuss your idea.
+## ✍️ Semantic Commit Message Rules
+We follow semantic commit messages to keep our history clean and clear:
+* `feat`: A new feature
+* `fix`: A bug fix
+* `chore`: Maintenance, updates, configurations
+* `docs`: Documentation changes
+* `refactor`: Code restructuring without function change
+* `test`: Adding or correcting tests
 
-### Pull Requests
-1. Fork the repo and create your branch from `main`.
-2. If you've added code that should be tested, add tests.
-3. Ensure the test suite passes.
-4. Make sure your code follows the existing style (we use PEP 8).
-5. Issue a pull request!
-
-## Attribution
-Please note that all contributions will be attributed to the project and its primary author, Raj Kishor Mahapatra, under the MIT License.
-
-## Questions?
-Feel free to open an issue for any questions you might have.
+Example: `feat: add input sanitization for form variables`

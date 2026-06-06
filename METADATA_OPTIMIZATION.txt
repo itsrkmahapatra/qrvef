@@ -1,0 +1,15 @@
+﻿=========================================
+GITHUB TOPICS/TAGS OPTIMIZATION LIST
+=========================================
+Project Name: qrvef
+Custom Topics (15):
+post-quantum-cryptography, gdpr-compliance, Mifid-ii, crypto-shredding, zk-stark, zero-knowledge-proofs, data-privacy, cybersecurity, python, key-encapsulation, verifiable-erasure, high-assurance, secure-erasure, gdpr, open-source
+
+-----------------------------------------
+INSTRUCTIONS FOR COPY-PASTING:
+1. Open your repository page on GitHub: https://github.com/itsrkmahapatra/qrvef
+2. Click the gear icon (Settings) next to the "About" section on the right sidebar.
+3. Locate the "Topics" input field.
+4. Copy the list of 15 custom topics above, paste them one-by-one or comma-separated, and press Enter.
+5. Click "Save changes".
+=========================================
