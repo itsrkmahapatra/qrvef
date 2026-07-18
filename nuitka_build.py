@@ -36,7 +36,7 @@ def run_build():
         # In a real build environment, this would run the compilation
         # result = subprocess.run(cmd, check=True)
         print("\n[Simulated] Nuitka compilation complete.")
-        print("[Simulated] Binary 'dist/main.exe' generated with C-level anti-tampering.")
+        print("[Simulated] Binary 'dist/main.bin' generated with C-level anti-tampering.")
     except Exception as e:
         print(f"Build failed: {e}")
 
