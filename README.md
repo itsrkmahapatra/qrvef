@@ -19,7 +19,7 @@ Check out our interactive demo in action:
 ---
 
 ## ✨ Key Features
-- 🔐 **Verifiable Crypto-Shredding**: Cryptographically erases data by deleting key encapsulation packages.
+- 🔐 **Verifiable Key Revocation**: Cryptographically purges access by revoking key encapsulation packages.
 - 🛡️ **FIPS 203 Post-Quantum Security**: Implements quantum-resistant key encapsulation mechanisms.
 - 📜 **zk-STARK Proof Generation**: Provides zero-knowledge auditing receipts to verify erasure to third parties.
 - 🧠 **Secure Memory Locking**: Utilizes RAM lock frameworks to prevent key dumping attacks.
@@ -36,17 +36,17 @@ Clone the repository, install Python requirements, and execute main.py to initia
 Here is how to get started programmatically:
 
 ```python
-# Create keypair and shred it to prove GDPR compliance
+# Create keypair and revoke it to prove GDPR compliance
 from crypto_core import PQKErasure, zkProof
 
 # Generate keys and encrypt payload
 kem = PQKErasure.generate_keypair()
 ciphertext, shared_key = kem.encrypt_data(b"GDPR Personal Data")
 
-# Erasure cycle
-receipt = kem.shred_keypair()
-proof = zkProof.verify_shredding(receipt)
-print("Erasure Audit Result:", proof.is_valid())
+# Revocation cycle
+receipt = kem.revoke_keypair()
+proof = zkProof.verify_revocation(receipt)
+print("Revocation Audit Result:", proof.is_valid())
 ```
 
 ---
