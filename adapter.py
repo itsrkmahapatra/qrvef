@@ -55,7 +55,7 @@ async def ingest_trade(payload: IngestPayload):
 @app.post("/shred")
 async def shred_pii(request: ShredRequest):
     """
-    Executes crypto-shredding for a specific event hash.
+    Executes key revocation for a specific event hash.
     Used for GDPR Article 17 compliance.
     """
     event_data = event_store.get(request.event_hash)
@@ -72,7 +72,7 @@ async def shred_pii(request: ShredRequest):
             "certificate": certificate
         }
     except Exception as e:
-        logger.error(f"Shredding failed: {e}")
+        logger.error(f"Revocation failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/health")

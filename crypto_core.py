@@ -6,7 +6,7 @@ Advanced Cryptographic Core:
 - Hybrid Post-Quantum Key Encapsulation (FIPS 203)
 - IETF SCITT-Aligned Event Logging (COSE_Sign1)
 - Post-Quantum zk-STARK Auditing (FRI-based simulation)
-- Verifiable Crypto-Shredding (AES-256-GCM)
+- Verifiable Key Revocation (AES-256-GCM)
 """
 import os
 import hashlib

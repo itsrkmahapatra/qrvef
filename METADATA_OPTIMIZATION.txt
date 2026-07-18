@@ -1,9 +1,9 @@
-﻿=========================================
+=========================================
 GITHUB TOPICS/TAGS OPTIMIZATION LIST
 =========================================
 Project Name: qrvef
 Custom Topics (15):
-post-quantum-cryptography, gdpr-compliance, Mifid-ii, crypto-shredding, zk-stark, zero-knowledge-proofs, data-privacy, cybersecurity, python, key-encapsulation, verifiable-erasure, high-assurance, secure-erasure, gdpr, open-source
+post-quantum-cryptography, gdpr-compliance, Mifid-ii, key-revocation, zk-stark, zero-knowledge-proofs, data-privacy, cybersecurity, python, key-encapsulation, verifiable-erasure, high-assurance, secure-erasure, gdpr, open-source
 
 -----------------------------------------
 INSTRUCTIONS FOR COPY-PASTING:

@@ -10,7 +10,7 @@ Currently, we only support the latest version of QRVEF.
 
 ## Reporting a Vulnerability
 
-We take the security of this framework extremely seriously. If you find a vulnerability regarding key extraction, memory locking bypasses, or crypto-shredding failures, please do NOT open a public issue.
+We take the security of this framework extremely seriously. If you find a vulnerability regarding key extraction, memory locking bypasses, or key-revocation failures, please do NOT open a public issue.
 
 Instead, please report security vulnerabilities directly to the maintainer:
 **Raj Kishor Mahapatra**
